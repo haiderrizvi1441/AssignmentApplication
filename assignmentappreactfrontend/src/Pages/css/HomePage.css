@@ -1,0 +1,36 @@
+.terminal-container {
+    font-family: monospace;
+    color: #00ff00;
+    background-color: #000;
+    padding: 20px;
+    border: 1px solid #00ff00;
+}
+
+.terminal-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.terminal-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.terminal-button {
+    background-color: #00ff00;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.terminal-content {
+    /* Add your content styles here */
+}
