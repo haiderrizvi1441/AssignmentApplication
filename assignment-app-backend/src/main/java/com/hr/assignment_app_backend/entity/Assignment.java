@@ -25,6 +25,7 @@ public class Assignment {
     private String githubUrl;
     private String branch;
     private String codeReviewVideoUrl;
+    private String reviewerComment;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL) // optional is false as assignment cannot be created without user
     private User user;

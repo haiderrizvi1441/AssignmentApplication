@@ -1,12 +1,10 @@
 package com.hr.assignment_app_backend.controller;
 
 
+import com.hr.assignment_app_backend.AssignmentAppBackendApplication;
 import com.hr.assignment_app_backend.entity.Assignment;
 import com.hr.assignment_app_backend.entity.User;
-import com.hr.assignment_app_backend.model.AssignmentRequest;
-import com.hr.assignment_app_backend.model.UserLoginRequest;
-import com.hr.assignment_app_backend.model.UserLoginResponse;
-import com.hr.assignment_app_backend.model.UserRequest;
+import com.hr.assignment_app_backend.model.*;
 import com.hr.assignment_app_backend.service.AssignmentService;
 import com.hr.assignment_app_backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +23,8 @@ public class AssignmentAppController {
 
     @Autowired
     private AssignmentService assignmentService;
+    @Autowired
+    private AssignmentAppBackendApplication assignmentAppBackendApplication;
 
     @GetMapping("/test")
     public String testing(){
@@ -117,7 +117,33 @@ public class AssignmentAppController {
 
         return new ResponseEntity<>(myAssignment, HttpStatus.CREATED);
     }
-    // Update Assignment
+
+    // Update assignment Status
+    @PutMapping("/assignment/updatestatus/{id}")
+    public ResponseEntity<Assignment> updateAssignmentStatus(@PathVariable Long id, @RequestBody String newStatus){
+        Assignment updatedAssignment = assignmentService.updateAssignmentStatus(id, newStatus);
+
+        return new ResponseEntity<>(updatedAssignment, HttpStatus.ACCEPTED);
+    }
+
+    // Assignment Update By Student
+    @PutMapping("/assignment/studentupdateassignment/{id}")
+    public ResponseEntity<Assignment> updateAssignmentStudent(@PathVariable Long id, @RequestBody AssignmentUpdateStudentRequest studentUpdateRequest){
+        Assignment updatedAssignment = assignmentService.studentUpdateAssignment(id,studentUpdateRequest);
+
+        return new ResponseEntity<>(updatedAssignment, HttpStatus.ACCEPTED);
+    }
+
+    // Assignment Update By Reviewer
+    @PutMapping("/assignment/reviewerupdateassignment/{id}")
+    public ResponseEntity<Assignment> updateAssignmentReviewer(@PathVariable Long id, @RequestBody AssignmentUpdateReviewerRequest reviewerUpdateRequest){
+        Assignment updatedAssignment = assignmentService.reviewerUpdateAssignment(id, reviewerUpdateRequest);
+
+        return new ResponseEntity<>(updatedAssignment, HttpStatus.ACCEPTED);
+
+
+    }
+
     // Delete Assignment By Id
     @DeleteMapping("/assignment/deletebyid/{id}")
     public ResponseEntity<String> deleteAssignmentById(@PathVariable Long id){
